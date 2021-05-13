@@ -1,15 +1,28 @@
-const { user } = require('../models/user');
-const createUserValid = (req, res, next) => {
-    // TODO: Implement validatior for user entity during creation
+const { validationResult } = require('express-validator');
 
-    next();
-}
+const createUserValid = (req, res, next) => {
+  const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    const errorMessages = errors.errors.map((el) => el.msg);
+
+    return res.status(400).json({ error: true, message: errorMessages });
+  }
+
+  next();
+};
 
 const updateUserValid = (req, res, next) => {
-    // TODO: Implement validatior for user entity during update
+  const errors = validationResult(req);
 
-    next();
-}
+  if (!errors.isEmpty()) {
+    const errorMessages = errors.errors.map((el) => el.msg);
+
+    return res.status(400).json({ error: true, message: errorMessages });
+  }
+
+  next();
+};
 
 exports.createUserValid = createUserValid;
 exports.updateUserValid = updateUserValid;
