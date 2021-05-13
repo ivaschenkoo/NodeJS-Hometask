@@ -16,7 +16,7 @@ class BaseRepository {
   }
 
   getOne(search) {
-    return this.dbContext.find(search).value();
+    return this.dbContext.find({ id: search }).value();
   }
 
   findByFields(searchBy) {

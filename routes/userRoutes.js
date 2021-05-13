@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const UserService = require('../services/userService');
-const { validateUsers } = require('../helpers/user.validation');
 const { createUserValid, updateUserValid } = require('../middlewares/user.validation.middleware');
 const { responseMiddleware } = require('../middlewares/response.middleware');
 
@@ -31,7 +30,7 @@ router.get('/:id', (req, res, next) => {
   }
 }, responseMiddleware);
 
-router.post('', validateUsers(), createUserValid, (req, res, next) => {
+router.post('', createUserValid, (req, res, next) => {
   try {
     const { body } = req;
     const user = UserService.createUser(body);
@@ -44,7 +43,7 @@ router.post('', validateUsers(), createUserValid, (req, res, next) => {
   }
 }, responseMiddleware);
 
-router.put('/:id', validateUsers(), updateUserValid, (req, res, next) => {
+router.put('/:id', updateUserValid, (req, res, next) => {
   try {
     const { id } = req.params;
     const updatedData = req.body;
@@ -61,8 +60,9 @@ router.put('/:id', validateUsers(), updateUserValid, (req, res, next) => {
 router.delete('/:id', (req, res, next) => {
   try {
     const { id } = req.params;
+    const deletedUser = UserService.deleteUser(id);
 
-    UserService.deleteUser(id);
+    res.data = { isDeleted: Boolean(deletedUser), deletedAccount: deletedUser };
   } catch (err) {
     res.err = err;
   } finally {

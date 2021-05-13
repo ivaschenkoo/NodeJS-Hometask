@@ -26,7 +26,14 @@ class UserService {
     const isBusy = UserRepository.findByFields(searchFields);
 
     if (!isBusy) {
-      const user = UserRepository.create(data);
+      const updatedData = { ...data };
+      Object.keys(data).forEach((el) => {
+        const element = data[el];
+
+        updatedData[el] = element === Number(element) ? element : element.toLowerCase();
+      });
+
+      const user = UserRepository.create(updatedData);
 
       if (!user) {
         throw Error('Can\'t create new user');
@@ -41,7 +48,7 @@ class UserService {
   updateUser(id, data) {
     const user = this.getUser(id);
 
-    if (!user) {
+    if (user) {
       const searchFields = { email: data.email, phoneNumber: data.phoneNumber };
       const isBusy = UserRepository.findByFields(searchFields);
 
@@ -68,7 +75,7 @@ class UserService {
       const isDeleted = UserRepository.delete(id);
 
       if (!isDeleted) {
-        throw Error('An error occurred while uninstalling');
+        throw Error('An error occurred while removing');
       }
 
       return isDeleted;

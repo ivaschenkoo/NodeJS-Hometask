@@ -6,10 +6,10 @@ const responseMiddleware = (req, res, next) => {
   }
 
   if (res.data) {
-    return res.status(200).json({ body: res.data });
+    return res.status(200).json(res.data);
   }
 
-  return res.status(200);
+  return res.status(200).json({ body: true });
 };
 
 exports.responseMiddleware = responseMiddleware;
