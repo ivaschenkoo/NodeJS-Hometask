@@ -13,7 +13,7 @@ routes(app);
 
 app.use('/', express.static('./client/build'));
 
-const port = 3050;
+const port = 80;
 app.listen(port, () => {});
 
 exports.app = app;
