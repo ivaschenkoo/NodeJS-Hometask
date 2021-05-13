@@ -16,7 +16,8 @@ class Fight extends React.Component {
 
     async componentDidMount() {
         const fighters = await getFighters();
-        if(fighters && !fighters.error) {
+
+        if(fighters.length > 0 && !fighters.error) {
             this.setState({ fighters });
         }
     }

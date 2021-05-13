@@ -24,5 +24,7 @@ module.exports = {
     "no-cond-assign": ["error", "always"],
     "no-multi-spaces": ["error"],
     "consistent-return": "off",
+    "class-methods-use-this": "off",
+    "no-restricted-syntax": "off",
   },
 };

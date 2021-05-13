@@ -1,7 +1,7 @@
 #!/bin/bash
 cd client 
-npm install
-npm run build
+yarn install
+yarn run build
 cd ..
-npm install
-npm start
+yarn install
+yarn start

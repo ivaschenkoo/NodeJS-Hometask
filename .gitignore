@@ -107,3 +107,9 @@ database.json
 result.txt
 result.json
 temp-repo
+
+.vscode
+client/package-lock.json
+client/yarn.lock
+package-lock.json
+yarn.lock
